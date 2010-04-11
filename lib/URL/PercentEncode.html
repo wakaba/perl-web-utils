@@ -1,0 +1,103 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>URL::PercentEncode - Safe percent-encoding and percent-decoding implementation</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:root@localhost" />
+</head>
+
+<body style="background-color: white">
+
+
+<!-- INDEX BEGIN -->
+<div name="index">
+<p><a name="__index__"></a></p>
+
+<ul>
+
+	<li><a href="#name">NAME</a></li>
+	<li><a href="#synopsis">SYNOPSIS</a></li>
+	<li><a href="#functions">FUNCTIONS</a></li>
+	<li><a href="#see_also">SEE ALSO</a></li>
+	<li><a href="#availability">AVAILABILITY</a></li>
+	<li><a href="#author">AUTHOR</a></li>
+	<li><a href="#license">LICENSE</a></li>
+</ul>
+
+<hr name="index" />
+</div>
+<!-- INDEX END -->
+
+<p>
+</p>
+<h1><a name="name">NAME</a></h1>
+<p>URL::PercentEncode - Safe percent-encoding and percent-decoding implementation</p>
+<p>
+</p>
+<hr />
+<h1><a name="synopsis">SYNOPSIS</a></h1>
+<pre>
+  use URL::PercentEncode;
+  
+  my $encoded = percent_encode_c $utf8_string;
+  my $encoded = percent_encode_b $byte_string;
+  
+  my $utf8_string = percent_decode_c $encoded;
+  my $byte_string = percent_decode_b $encoded;</pre>
+<p>
+</p>
+<hr />
+<h1><a name="functions">FUNCTIONS</a></h1>
+<dl>
+<dt><strong><a name="_encoded" class="item">$encoded = percent_encode_c $utf8_string</a></strong></dt>
+
+<dd>
+<p>Percent-encode a character string.</p>
+</dd>
+<dt><strong>$encoded = percent_encode_b $byte_string</strong></dt>
+
+<dd>
+<p>Percent-encode a byte string.</p>
+</dd>
+<dt><strong><a name="_utf8_string" class="item">$utf8_string = percent_decode_c $encoded</a></strong></dt>
+
+<dd>
+<p>Decode a percent-encoded utf8 string.</p>
+</dd>
+<dt><strong><a name="_byte_string" class="item">$byte_string = percent_decode_b $encoded</a></strong></dt>
+
+<dd>
+<p>Decode a percent-encoded byte string.</p>
+</dd>
+</dl>
+<p>
+</p>
+<hr />
+<h1><a name="see_also">SEE ALSO</a></h1>
+<p>URL (Web Applications 1.0)
+&lt;http://www.whatwg.org/specs/web-apps/current-work/complete.html#url&gt;</p>
+<p>URI (<a href="http://www.ietf.org/rfc/rfc3986.txt" class="rfc">RFC 3986</a>) &lt;http://tools.ietf.org/html/rfc3986&gt;</p>
+<p>IRI (<a href="http://www.ietf.org/rfc/rfc3987.txt" class="rfc">RFC 3987</a>) &lt;http://tools.ietf.org/html/rfc3987&gt;</p>
+<p>
+</p>
+<hr />
+<h1><a name="availability">AVAILABILITY</a></h1>
+<p>Latest version of this Perl modules is available in the git repository
+&lt;http://suika.fam.cx/gate/git/wi/perl/webutils.git/&gt;.</p>
+<p>
+</p>
+<hr />
+<h1><a name="author">AUTHOR</a></h1>
+<p>Wakaba &lt;<a href="mailto:w@suika.fam.cx">w@suika.fam.cx</a>&gt;</p>
+<p>
+</p>
+<hr />
+<h1><a name="license">LICENSE</a></h1>
+<p>Copyright 2010 Wakaba &lt;<a href="mailto:w@suika.fam.cx">w@suika.fam.cx</a>&gt;</p>
+<p>This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.</p>
+
+</body>
+
+</html>

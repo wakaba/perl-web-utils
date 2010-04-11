@@ -1,6 +1,11 @@
 PROVE = prove
+POD2HTML = pod2html
 
-all:
+all: \
+	lib/URL/PercentEncode.html
+
+%.html: %.pod
+	$(POD2HTML) $< > $@
 
 test:
 	$(PROVE) t/url

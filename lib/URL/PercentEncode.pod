@@ -1,0 +1,63 @@
+
+=head1 NAME
+
+URL::PercentEncode - Safe percent-encoding and percent-decoding implementation
+
+=head1 SYNOPSIS
+
+  use URL::PercentEncode;
+  
+  my $encoded = percent_encode_c $utf8_string;
+  my $encoded = percent_encode_b $byte_string;
+  
+  my $utf8_string = percent_decode_c $encoded;
+  my $byte_string = percent_decode_b $encoded;
+
+=head1 FUNCTIONS
+
+=over 4
+
+=item $encoded = percent_encode_c $utf8_string
+
+Percent-encode a character string.
+
+=item $encoded = percent_encode_b $byte_string
+
+Percent-encode a byte string.
+
+=item $utf8_string = percent_decode_c $encoded
+
+Decode a percent-encoded utf8 string.
+
+=item $byte_string = percent_decode_b $encoded
+
+Decode a percent-encoded byte string.
+
+=back
+
+=head1 SEE ALSO
+
+URL (Web Applications 1.0)
+<http://www.whatwg.org/specs/web-apps/current-work/complete.html#url>
+
+URI (RFC 3986) <http://tools.ietf.org/html/rfc3986>
+
+IRI (RFC 3987) <http://tools.ietf.org/html/rfc3987>
+
+=head1 AVAILABILITY
+
+Latest version of this Perl modules is available in the git repository
+<http://suika.fam.cx/gate/git/wi/perl/webutils.git/>.
+
+=head1 AUTHOR
+
+Wakaba <w@suika.fam.cx>
+
+=head1 LICENSE
+
+Copyright 2010 Wakaba <w@suika.fam.cx>
+
+This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=cut
