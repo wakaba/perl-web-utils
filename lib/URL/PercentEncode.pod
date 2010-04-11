@@ -13,13 +13,23 @@ URL::PercentEncode - Safe percent-encoding and percent-decoding implementation
   my $utf8_string = percent_decode_c $encoded;
   my $byte_string = percent_decode_b $encoded;
 
+=head1 DESCRIPTION
+
+This module, C<URL::PercentEncode>, provides four functions to
+percent-encode or percent-decode strings in a slightly safe manner.
+Any string, utf8-flagged or -unflagged, can be encoded or decoded in
+URL's %HH format (percent-encoding, formally known as URI escape or
+URL encoding).
+
 =head1 FUNCTIONS
+
+The module exports the following functions:
 
 =over 4
 
 =item $encoded = percent_encode_c $utf8_string
 
-Percent-encode a character string.
+Percent-encode a character string (i.e. a utf8-flagged string).
 
 =item $encoded = percent_encode_b $byte_string
 
@@ -27,7 +37,7 @@ Percent-encode a byte string.
 
 =item $utf8_string = percent_decode_c $encoded
 
-Decode a percent-encoded utf8 string.
+Decode a percent-encoded utf8 character string.
 
 =item $byte_string = percent_decode_b $encoded
 

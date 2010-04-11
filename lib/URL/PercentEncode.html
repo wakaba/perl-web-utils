@@ -19,6 +19,7 @@
 
 	<li><a href="#name">NAME</a></li>
 	<li><a href="#synopsis">SYNOPSIS</a></li>
+	<li><a href="#description">DESCRIPTION</a></li>
 	<li><a href="#functions">FUNCTIONS</a></li>
 	<li><a href="#see_also">SEE ALSO</a></li>
 	<li><a href="#availability">AVAILABILITY</a></li>
@@ -49,12 +50,22 @@
 <p>
 </p>
 <hr />
+<h1><a name="description">DESCRIPTION</a></h1>
+<p>This module, <code>URL::PercentEncode</code>, provides four functions to
+percent-encode or percent-decode strings in a slightly safe manner.
+Any string, utf8-flagged or -unflagged, can be encoded or decoded in
+URL's %HH format (percent-encoding, formally known as URI escape or
+URL encoding).</p>
+<p>
+</p>
+<hr />
 <h1><a name="functions">FUNCTIONS</a></h1>
+<p>The module exports the following functions:</p>
 <dl>
 <dt><strong><a name="_encoded" class="item">$encoded = percent_encode_c $utf8_string</a></strong></dt>
 
 <dd>
-<p>Percent-encode a character string.</p>
+<p>Percent-encode a character string (i.e. a utf8-flagged string).</p>
 </dd>
 <dt><strong>$encoded = percent_encode_b $byte_string</strong></dt>
 
@@ -64,7 +75,7 @@
 <dt><strong><a name="_utf8_string" class="item">$utf8_string = percent_decode_c $encoded</a></strong></dt>
 
 <dd>
-<p>Decode a percent-encoded utf8 string.</p>
+<p>Decode a percent-encoded utf8 character string.</p>
 </dd>
 <dt><strong><a name="_byte_string" class="item">$byte_string = percent_decode_b $encoded</a></strong></dt>
 
