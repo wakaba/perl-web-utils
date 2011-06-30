@@ -21,7 +21,7 @@ sub percent_encode_b ($) {
 
 sub percent_encode_c ($) {
   require Encode;
-  my $s = Encode::encode ('utf8', ''.$_[0]);
+  my $s = Encode::encode ('utf-8', ''.$_[0]);
   $s =~ s/([^0-9A-Za-z._~-])/sprintf '%%%02X', ord $1/ge;
   return $s;
 } # percent_encode_c
@@ -38,7 +38,7 @@ sub percent_decode_c ($) {
   utf8::encode ($s) if utf8::is_utf8 ($s);
   $s =~ s/%([0-9A-Fa-f]{2})/pack 'C', hex $1/ge;
   require Encode;
-  return Encode::decode ('utf8', $s);
+  return Encode::decode ('utf-8', $s);
 } # percent_decode_c
 
 1;
