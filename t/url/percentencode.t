@@ -5,6 +5,7 @@ use Path::Class;
 use lib file (__FILE__)->dir->parent->parent->subdir ('lib')->stringify;
 use base qw(Test::Class);
 use Test::More;
+use Test::Differences;
 use URL::PercentEncode;
 use Encode;
 
@@ -58,13 +59,44 @@ sub _pd : Test(36) {
   }
 } # _pd
 
+sub _parse_form_urlencoded_b : Test(24) {
+  for (
+    [undef, {}],
+    ['', {}],
+    ['0' => {0 => ['']}],
+    ['ab=cd' => {ab => ['cd']}],
+    ['ab=cd&ab=ef' => {ab => ['cd', 'ef']}],
+    ['ab=ef&ab=cd' => {ab => ['ef', 'cd']}],
+    ['ab=cd&ab=cd' => {ab => ['cd', 'cd']}],
+    ['ab=cd&AB=ef' => {ab => ['cd'], AB => ['ef']}],
+    ['ab=cd&xy=ef' => {ab => ['cd'], xy => ['ef']}],
+    ['ab=cd;ab=ef' => {ab => ['cd', 'ef']}],
+    ['a%19%87%AC%feb=cd%43%9E%21' => {"a\x19\x87\xAC\xFEb" => ["cd\x43\x9E\x21"]}],
+    ['ab=cc&0' => {ab => ['cc'], 0 => ['']}],
+    ['ab=cc&0=' => {ab => ['cc'], 0 => ['']}],
+    ['ab=cc&=0' => {ab => ['cc'], '' => ['0']}],
+    ['ab=cc=0' => {ab => ['cc=0']}],
+    ['=ab=' => {'' => ['ab=']}],
+    ['ab=cc%260' => {ab => ['cc&0']}],
+    ['ab=cc&' => {ab => ['cc'], '' => ['']}],
+    ['&ab=cc&' => {ab => ['cc'], '' => ['', '']}],
+    ['&&' => {'' => ['', '', '']}],
+    ['&;&' => {'' => ['', '', '', '']}],
+    ['&%3B&' => {'' => ['', ''], ';' => ['']}],
+    ["\x{5000}\x{200}%CD=\x{5000}%26%9E" => {"\xe5\x80\x80\xc8\x80\xcd" => ["\xe5\x80\x80&\x9e"]}],
+    ["\xFE\xA9\xCE=\x81\x40" => {"\xFE\xA9\xCE" => ["\x81\x40"]}],
+  ) {
+    eq_or_diff parse_form_urlencoded_b $_->[0], $_->[1];
+  }
+} # parse_form_urlencoded_b
+
 __PACKAGE__->runtests;
 
 1;
 
 =head1 LICENSE
 
-Copyright 2010 Wakaba <w@suika.fam.cx>
+Copyright 2010-2012 Wakaba <w@suika.fam.cx>
 
 This program is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
