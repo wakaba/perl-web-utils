@@ -47,8 +47,9 @@ sub parse_form_urlencoded_b ($) {
   } else {
     my $params = {};
     for (split /[&;]/, $_[0], -1) {
-      my ($n, $v) = map { defined $_ ? percent_decode_b $_ : '' }
-          split /[=]/, $_, 2;
+      my ($n, $v) = map { defined $_ ? do {
+        my $v = $_; $v =~ tr/+/ /; percent_decode_b $v;
+      } : '' } split /[=]/, $_, 2;
       push @{$params->{defined $n ? $n : ''} ||= []}, defined $v ? $v : '';
     }
     return $params;

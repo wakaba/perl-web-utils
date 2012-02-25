@@ -13,7 +13,7 @@ sub _flagged ($) {
   return decode 'utf8', $_[0];
 } # _flagged
 
-sub _pe : Test(28) {
+sub _pe : Test(32) {
   for (
       [undef, '', ''],
       ['' => '', ''],
@@ -22,6 +22,7 @@ sub _pe : Test(28) {
       ["\xA1\xC8\x4E\x4B\x21\x0D" => '%A1%C8NK%21%0D', '%C2%A1%C3%88NK%21%0D'],
       ["http://abc/a+b?x(y)z~[*]" => 'http%3A%2F%2Fabc%2Fa%2Bb%3Fx%28y%29z~%5B%2A%5D', 'http%3A%2F%2Fabc%2Fa%2Bb%3Fx%28y%29z~%5B%2A%5D'],
       ["\x{4e00}\xC1" => '%4E00%C1', '%E4%B8%80%C3%81'],
+      ["ab+cd" => 'ab%2Bcd', 'ab%2Bcd'],
   ) {
     my $s = percent_encode_b ($_->[0]);
     is $s, $_->[1];
@@ -33,7 +34,7 @@ sub _pe : Test(28) {
   }
 } # _pe
 
-sub _pd : Test(36) {
+sub _pd : Test(39) {
   for (
       [undef, '', ''],
       ['', '', ''],
@@ -47,6 +48,7 @@ sub _pd : Test(36) {
       ['%4E00%C1', "\x4e00\xC1", "\x4e00\x{FFFD}"],
       ['%E4%B8%80%C3%81', "\xE4\xB8\x80\xC3\x81", "\x{4e00}\xC1"],
       [_flagged '%E4%B8%80%C3%81', "\xE4\xB8\x80\xC3\x81", "\x{4e00}\xC1"],
+      ['ab+cd', 'ab+cd', 'ab+cd'],
   ) {
     no warnings 'uninitialized';
 
@@ -59,7 +61,7 @@ sub _pd : Test(36) {
   }
 } # _pd
 
-sub _parse_form_urlencoded_b : Test(24) {
+sub _parse_form_urlencoded_b : Test(26) {
   for (
     [undef, {}],
     ['', {}],
@@ -85,6 +87,8 @@ sub _parse_form_urlencoded_b : Test(24) {
     ['&%3B&' => {'' => ['', ''], ';' => ['']}],
     ["\x{5000}\x{200}%CD=\x{5000}%26%9E" => {"\xe5\x80\x80\xc8\x80\xcd" => ["\xe5\x80\x80&\x9e"]}],
     ["\xFE\xA9\xCE=\x81\x40" => {"\xFE\xA9\xCE" => ["\x81\x40"]}],
+    ['ab+cd=xy+zb' => {'ab cd' => ['xy zb']}],
+    ['ab+%2Bcd+=xy+%2bzb+' => {'ab +cd ' => ['xy +zb ']}],
   ) {
     eq_or_diff parse_form_urlencoded_b $_->[0], $_->[1];
   }
