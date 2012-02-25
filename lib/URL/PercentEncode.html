@@ -22,7 +22,8 @@
 	<li><a href="#description">DESCRIPTION</a></li>
 	<li><a href="#functions">FUNCTIONS</a></li>
 	<li><a href="#see_also">SEE ALSO</a></li>
-	<li><a href="#availability">AVAILABILITY</a></li>
+	<li><a href="#distribution">DISTRIBUTION</a></li>
+	<li><a href="#changes">CHANGES</a></li>
 	<li><a href="#author">AUTHOR</a></li>
 	<li><a href="#license">LICENSE</a></li>
 </ul>
@@ -46,7 +47,9 @@
   my $encoded = percent_encode_b $byte_string;
   
   my $utf8_string = percent_decode_c $encoded;
-  my $byte_string = percent_decode_b $encoded;</pre>
+  my $byte_string = percent_decode_b $encoded;
+  
+  my $form_data = parse_form_urlencoded_b $encoded;</pre>
 <p>
 </p>
 <hr />
@@ -82,31 +85,74 @@ URL encoding).</p>
 <dd>
 <p>Decode a percent-encoded byte string.</p>
 </dd>
+<dt><strong><a name="_form_data" class="item">$form_data = parse_form_urlencoded_b $encoded</a></strong></dt>
+
+<dd>
+<p>Intepret the given string as
+<code>application/x-www-form-urlencoded</code>-encoded form data set and return
+the decoded data as a set of byte strings.</p>
+<p>The input must be a byte string or the <code>undef</code> value.</p>
+<p>The method return a hash reference, which contains zero or more
+key-value pairs where a value is an array reference.  Any name-value
+pairs contained in the input string is stored in the hash reference as
+a key and one of values in the array reference for the key.  Order of
+name-value pairs are not preserved as the return value is a hash
+reference.  However, order of values sharing their names are preserved
+as order of values in the array reference.  Values are percent-decoded
+but left character-encoded (i.e. left as byte strings).</p>
+<p>This method is an implementation of the steps to &quot;decode
+<code>application/x-www-form-urlencoded</code> payloads&quot;, except: The <em>isindex</em>
+flag is not supported.  The <em>encoding</em> parameter and the <code>_charset_</code>
+hack is not supported as the method does not handle character
+encoding.  The <code>U+003B</code> <code>SEMICOLON</code> character (<code>;</code>) is also used as
+delimiter as well as the <code>U+0026</code> <code>AMPERSAND</code> character (<code>&amp;</code>) for
+backward compatibility with popular implementations of
+<code>application/x-www-form-urlencoded</code> decoders (This is a willful
+violation to the spec).</p>
+</dd>
 </dl>
 <p>
 </p>
 <hr />
 <h1><a name="see_also">SEE ALSO</a></h1>
-<p>URL (Web Applications 1.0)
-&lt;http://www.whatwg.org/specs/web-apps/current-work/complete.html#url&gt;</p>
-<p>URI (<a href="http://www.ietf.org/rfc/rfc3986.txt" class="rfc">RFC 3986</a>) &lt;http://tools.ietf.org/html/rfc3986&gt;</p>
-<p>IRI (<a href="http://www.ietf.org/rfc/rfc3987.txt" class="rfc">RFC 3987</a>) &lt;http://tools.ietf.org/html/rfc3987&gt;</p>
+<p>URL (HTML Standard)
+&lt;http://www.whatwg.org/specs/web-apps/current-work/complete.html#url&gt;.</p>
+<p>URI (<a href="http://www.ietf.org/rfc/rfc3986.txt" class="rfc">RFC 3986</a>) &lt;http://tools.ietf.org/html/rfc3986&gt;.</p>
+<p>IRI (<a href="http://www.ietf.org/rfc/rfc3987.txt" class="rfc">RFC 3987</a>) &lt;http://tools.ietf.org/html/rfc3987&gt;.</p>
+<p>The steps to &quot;decode <code>application/x-www-form-urlencoded</code> payloads&quot;
+(HTML Standard)
+&lt;http://www.whatwg.org/specs/web-apps/current-work/#application/x-www-form-urlencoded-encoding-algorithm&gt;.</p>
 <p>
 </p>
 <hr />
-<h1><a name="availability">AVAILABILITY</a></h1>
-<p>Latest version of this Perl modules is available in the git repository
+<h1><a name="distribution">DISTRIBUTION</a></h1>
+<p>Latest version of this Perl modules is available in the Git
+repository: &lt;https://github.com/wakaba/perl-web-utils&gt; or
 &lt;http://suika.fam.cx/gate/git/wi/perl/webutils.git/&gt;.</p>
 <p>
 </p>
 <hr />
+<h1><a name="changes">CHANGES</a></h1>
+<ol>
+<li><strong><a name="11" class="item">-04-11 (1.0)</a></strong>
+
+<p>First version.</p>
+</li>
+<li><strong><a name="25" class="item">-02-25 (2.0)</a></strong>
+
+<p>Added <code>application/x-www-form-urlencoded</code> support.</p>
+</li>
+</ol>
+<p>
+</p>
+<hr />
 <h1><a name="author">AUTHOR</a></h1>
-<p>Wakaba &lt;<a href="mailto:w@suika.fam.cx">w@suika.fam.cx</a>&gt;</p>
+<p>Wakaba &lt;<a href="mailto:w@suika.fam.cx">w@suika.fam.cx</a>&gt;.</p>
 <p>
 </p>
 <hr />
 <h1><a name="license">LICENSE</a></h1>
-<p>Copyright 2010 Wakaba &lt;<a href="mailto:w@suika.fam.cx">w@suika.fam.cx</a>&gt;</p>
+<p>Copyright 2010-2012 Wakaba &lt;<a href="mailto:w@suika.fam.cx">w@suika.fam.cx</a>&gt;.</p>
 <p>This program is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.</p>
 
