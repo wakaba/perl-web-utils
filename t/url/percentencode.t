@@ -30,7 +30,7 @@ sub _pe : Test(32) {
 
     my $t = percent_encode_c ($_->[0]);
     is $t, $_->[2];
-    ok !utf8::is_utf8 ($s);
+    ok !utf8::is_utf8 ($t);
   }
 } # _pe
 
