@@ -2,6 +2,11 @@
 
 URL::PercentEncode - Safe percent-encoding and percent-decoding implementation
 
+=head1 IMPORTANT
+
+This module is now B<DEPRECATED> in favor of new modules:
+<https://github.com/manakai/perl-web-url>.
+
 =head1 SYNOPSIS
 
   use URL::PercentEncode;
@@ -90,7 +95,7 @@ The steps to "decode C<application/x-www-form-urlencoded> payloads"
 
 Latest version of this Perl modules is available in the Git
 repository: <https://github.com/wakaba/perl-web-utils> or
-<http://suika.fam.cx/gate/git/wi/perl/webutils.git/>.
+<https://suika.suikawiki.org/gate/git/wi/perl/webutils.git/>.
 
 =head1 CHANGES
 
@@ -108,11 +113,11 @@ Added C<application/x-www-form-urlencoded> support.
 
 =head1 AUTHOR
 
-Wakaba <w@suika.fam.cx>.
+Wakaba <wakaba@suikawiki.org>.
 
 =head1 LICENSE
 
-Copyright 2010-2012 Wakaba <w@suika.fam.cx>.
+Copyright 2010-2012 Wakaba <wakaba@suikawiki.org>.
 
 This program is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.

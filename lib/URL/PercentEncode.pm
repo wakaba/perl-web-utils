@@ -60,7 +60,7 @@ sub parse_form_urlencoded_b ($) {
 
 =head1 LICENSE
 
-Copyright 2010-2012 Wakaba <w@suika.fam.cx>
+Copyright 2010-2012 Wakaba <wakaba@suikawiki.org>
 
 This program is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
